@@ -13,6 +13,7 @@
     "axios": "^0.17.1",
     "firebase": "^4.9.1",
     "toastr": "^2.1.4",
+    "vee-validate": "^2.0.0-beta.17",
     "vue": "^2.5.11",
     "vue-axios": "^2.0.2",
     "vuefire": "^1.4.5"

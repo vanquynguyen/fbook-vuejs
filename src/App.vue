@@ -23,6 +23,12 @@
                     </div>
                     <input type="submit" class="btn btn-primary" value="Add Book">
                 </form>
+                <br>
+                <p v-if="errors.length">
+                    <ul class="alert alert-danger">
+                        <li v-for="(error, index) in errors" v-bind:key="index">{{ error }}</li>
+                    </ul>
+                </p>
             </div>
         </div>
         <div class="panel panel-default">
@@ -38,7 +44,11 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody name="custom-classes-transition"
+                        enter-active-class="animated tada"
+                        leave-active-class="animated bounceOutRight"
+                        is="transition-group"
+                    >
                         <tr v-for="book in books" v-bind:key="book['.key']">
                             <td><a v-bind:href="book.url">{{book.title}}</a></td>
                             <td>{{book.author}}</td>
@@ -75,20 +85,27 @@
                     author: '',
                     url: 'http://'
                 },
+                errors: []
             }
         },
         firebase: {
             books: booksRef
         },
         methods: {
-            addBook: function () {
-                booksRef.push(this.newBook);
-                this.newBook.title = '';
-                this.newBook.author = '';
-                this.newBook.url = 'http://';
-                toastr.success('Book added successfully')
+            addBook(e) {
+                this.errors = [''];
+                if(!this.newBook.title) this.errors.push("Name required.");
+                if(!this.newBook.author) this.errors.push("Author required.");
+                e.preventDefault();
+                if(this.errors == '') {
+                    booksRef.push(this.newBook);
+                    this.newBook.title = '';
+                    this.newBook.author = '';
+                    this.newBook.url = 'http://';
+                    toastr.success('Book added successfully')
+                }
             },
-            removeBook: function (book) {
+            removeBook(book) {
                 booksRef.child(book['.key']).remove()
                 toastr.success('Book removed successfully')
             }
@@ -102,5 +119,9 @@
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
         margin-top: 20px;
+    }
+
+    ul li {
+        list-style-type: none;
     }
 </style>
