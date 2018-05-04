@@ -102,7 +102,7 @@
                 if(!this.newBook.title) this.errors.push("Name required.");
                 if(!this.newBook.author) this.errors.push("Author required.");
                 e.preventDefault();
-                console.log(errors.length);
+                console.log(1);
                 if(this.errors == '') {
                     booksRef.push(this.newBook);
                     this.newBook.title = '';
