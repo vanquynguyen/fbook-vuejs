@@ -92,6 +92,7 @@
             books: booksRef
         },
         methods: {
+            console.log(errors.length);
             addBook(e) {
                 this.errors = [''];
                 if(!this.newBook.title) this.errors.push("Name required.");
