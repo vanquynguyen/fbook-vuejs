@@ -24,7 +24,7 @@
                     <input type="submit" class="btn btn-primary" value="Add Book">
                 </form>
                 <br>
-                <p v-if="errors.length">
+                <p v-if="errors.length > 0">
                     <ul class="alert alert-danger">
                         <li v-for="(error, index) in errors" v-bind:key="index">{{ error }}</li>
                     </ul>
