@@ -44,12 +44,16 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody name="custom-classes-transition"
+                    <tbody 
+                        name="custom-classes-transition"
                         enter-active-class="animated tada"
                         leave-active-class="animated bounceOutRight"
                         is="transition-group"
                     >
-                        <tr v-for="book in books" v-bind:key="book['.key']">
+                        <tr 
+                            v-for="book in books" 
+                            v-bind:key="book['.key']"
+                        >
                             <td><a v-bind:href="book.url">{{book.title}}</a></td>
                             <td>{{book.author}}</td>
                             <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeBook(book)"></span></td>
@@ -92,12 +96,13 @@
             books: booksRef
         },
         methods: {
-            console.log(errors.length);
+           
             addBook(e) {
                 this.errors = [''];
                 if(!this.newBook.title) this.errors.push("Name required.");
                 if(!this.newBook.author) this.errors.push("Author required.");
                 e.preventDefault();
+                console.log(errors.length);
                 if(this.errors == '') {
                     booksRef.push(this.newBook);
                     this.newBook.title = '';
